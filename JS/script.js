@@ -1,8 +1,26 @@
+
 let currentSong = new Audio();
 let songs;
-let currFolder;
+async function getSongs() {
+  let a = await fetch("http://127.0.0.1:5500/songs/");
+  let response = await a.text();
 
 
+  //console.log(response);
+  // let songs = JSON.parse(response);
+
+  let div = document.createElement("div");
+  div.innerHTML = response;
+  let as = div.getElementsByTagName("a");
+  let songs = [];
+  for (let i = 0; i < as.length; i++) {
+    const element = as[i];
+    if (element.href.endsWith(".mp3")) {
+      songs.push(element.href);
+    }
+  }
+  return songs;
+}
 
 //second to min:second
 function convertSecondsToMinSec(seconds) {
@@ -76,7 +94,7 @@ async function getSongs(folder) {
          <li>
                <img class = "invert"src="images//music.svg" alt="" > 
                <div class="info">
-             <div>  ${song.replace("http://127.0.0.1:5500/songs/", " ")}</div>
+             <div>  ${song.replace("https://tanmayhh3009.github.io/songs/", " ")}</div>
              
                </div>
                <div class="playNow">
@@ -354,36 +372,6 @@ else{
 
 
 
-
-
-
-//add event listeners to previos and next
-
-// previous.addEventListener("click", () => {
-//   currentSong.pause()
-//   console.log("Previous clicked")
-//   let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
-//   console.log(index)
-//   if ((index - 1) >= 0) {
-//       playMusic(convertSecondsToMinSec(songs[index - 1]))
-//   }
-// })
-
-// // Add an event listener to next
-// next.addEventListener("click", () => {
-//   currentSong.pause()
-//   console.log("Next clicked")
-
-//   let index = songs.indexOf(currentSong.src.split("/").slice(-1)[0])
-//   console.log(index)
-//   if ((index + 1) < songs.length) {
-//       playMusic(convertSecondsToMinSec(songs[index - 1]))
-//   }
-// })
-
-// document.querySelector(".next").addEventListener("click",()=>{
-//   console.log("previos click")
-// })
 
 }
 main();
