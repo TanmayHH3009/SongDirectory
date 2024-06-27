@@ -1,26 +1,26 @@
 
 let currentSong = new Audio();
 let songs;
-async function getSongs() {
-  let a = await fetch("http://127.0.0.1:5500/songs/");
-  let response = await a.text();
+// async function getSongs() {
+//   let a = await fetch("http://127.0.0.1:5500/songs/");
+//   let response = await a.text();
 
 
-  //console.log(response);
-  // let songs = JSON.parse(response);
+//   //console.log(response);
+//   // let songs = JSON.parse(response);
 
-  let div = document.createElement("div");
-  div.innerHTML = response;
-  let as = div.getElementsByTagName("a");
-  let songs = [];
-  for (let i = 0; i < as.length; i++) {
-    const element = as[i];
-    if (element.href.endsWith(".mp3")) {
-      songs.push(element.href);
-    }
-  }
-  return songs;
-}
+//   let div = document.createElement("div");
+//   div.innerHTML = response;
+//   let as = div.getElementsByTagName("a");
+//   let songs = [];
+//   for (let i = 0; i < as.length; i++) {
+//     const element = as[i];
+//     if (element.href.endsWith(".mp3")) {
+//       songs.push(element.href);
+//     }
+//   }
+//   return songs;
+// }
 
 //second to min:second
 function convertSecondsToMinSec(seconds) {
